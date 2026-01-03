@@ -27,6 +27,9 @@ Route::get('/dashboard', [DeckController::class, 'index'])->middleware(['auth', 
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/decks/{deck}/flashcards', [FlashcardController::class, 'index'])
+        ->name('flashcards.index');
+
     Route::post('/decks/{deck}/flashcards', [FlashcardController::class, 'store'])
         ->name('flashcards.store');
 

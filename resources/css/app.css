@@ -10,6 +10,7 @@
 
 body {
     background: #9ce4ff;
+    background-position: fixed;
     background: linear-gradient(
         27deg,
         rgba(156, 228, 255, 1) 0%,
@@ -26,84 +27,6 @@ body {
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-}
-
-.animated-text::before {
-    content: "";
-    animation: typing 13.5s forwards;
-}
-
-.animated-text::after {
-    content: "";
-    border-right: 1px solid var(--caret);
-    animation: blink 0.5s linear infinite;
-}
-
-@keyframes typing {
-    0% {
-        content: "";
-    }
-    16% {
-        content: "W";
-    }
-    32% {
-        content: "Wi";
-    }
-    48% {
-        content: "Wit";
-    }
-    64% {
-        content: "Wita";
-    }
-    80% {
-        content: "Witaj";
-    }
-    96% {
-        content: "Witaj!";
-    }
-    100% {
-        content: "Witaj!";
-    }
-}
-@keyframes typing {
-    0.0000%,
-    27.3488% {
-        content: "";
-    }
-    1.1395%,
-    26.2093% {
-        content: "W";
-    }
-    2.2791%,
-    25.0698% {
-        content: "Wi";
-    }
-    3.4186%,
-    23.9302% {
-        content: "Wit";
-    }
-    4.5581%,
-    22.7907% {
-        content: "Wita";
-    }
-    5.6977%,
-    21.6512% {
-        content: "Witaj";
-    }
-    6.8372%,
-    20.5116% {
-        content: "Witaj!";
-    }
-}
-
-@keyframes blink {
-    0%,
-    100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
 }
 
 .welcome-btn {
