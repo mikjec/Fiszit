@@ -22,4 +22,23 @@ class DeckController extends Controller
         $deck = auth()->user()->decks()->create(['name' => $validated['deck_name']]);
         return redirect()->route('dashboard')->with('success', 'Zestaw został utworzony!');
     }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'deck_name' => 'required|string|max:100',
+        ]);
+
+        $deck = auth()->user()->decks()->findOrFail($id);
+        $deck->name = $validated['deck_name'];
+        $deck->save();
+
+        return redirect()->route('dashboard')->with('success', 'Nazwa zestawu została zaktualizowana!');
+    }
+    public function destroy($id)
+    {
+        $deck = auth()->user()->decks()->findOrFail($id);
+        $deck->delete();
+        return redirect()->route('dashboard')->with('success', 'Zestaw został usunięty!');
+    }
 }
