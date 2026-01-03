@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
+use App\Http\Controllers\FlashcardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,19 +25,14 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/dashboard', [DeckController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-use App\Http\Controllers\FlashcardController;
-
 Route::middleware('auth')->group(function () {
 
-    // Zapisanie nowej fiszki
     Route::post('/decks/{deck}/flashcards', [FlashcardController::class, 'store'])
         ->name('flashcards.store');
 
-    // Aktualizacja istniejącej fiszki
     Route::put('/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'update'])
         ->name('flashcards.update');
 
-    // Usunięcie fiszki
     Route::delete('/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'destroy'])
         ->name('flashcards.destroy');
 });
