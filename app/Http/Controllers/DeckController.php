@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\Deck;
+
 
 
 class DeckController extends Controller
@@ -40,5 +43,17 @@ class DeckController extends Controller
         $deck = auth()->user()->decks()->findOrFail($id);
         $deck->delete();
         return redirect()->route('dashboard')->with('success', 'Zestaw został usunięty!');
+    }
+
+    public function share(Deck $deck)
+    {
+        abort_if($deck->user_id !== auth()->id(), 403);
+        if (!$deck->share_token) {
+            $deck->update([
+                'is_public' => true,
+                'share_token' => Str::random(32),
+            ]);
+        }
+        return back()->with('succes', 'Zestaw został udostępniony!');
     }
 }

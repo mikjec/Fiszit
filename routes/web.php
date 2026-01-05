@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DeckController;
 use App\Http\Controllers\FlashcardController;
+use App\Http\Controllers\PublicDeckController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,10 +20,17 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/share/{token}', [PublicDeckController::class, 'show'])->name('decks.share');
 
+Route::post('/decks/{deck}/share', [DeckController::class, 'share'])
+    ->middleware('auth')
+    ->name('decks.share.generate');
+
+
 Route::middleware('auth')->group(function () {
+    Route::get('/decks', [DeckController::class, 'index'])->name('decks');
     Route::post('/decks', [DeckController::class, 'store'])->name('decks.store');
     Route::put('/decks/{deck}', [DeckController::class, 'update'])->name('decks.update');
     Route::delete('/decks/{deck}', [DeckController::class, 'destroy'])->name('decks.destroy');
+    Route::get('/decks/{deck}/learn', [FlashcardController::class, 'learn'])->name('decks.learn');
 });
 
 Route::get('/dashboard', [DeckController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

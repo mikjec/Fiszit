@@ -22,9 +22,33 @@
         }
     }">
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{$deck->name }}
-            </h2>
+            <div class="flex flex-row justify-between items-center">
+                <h2 class=" font-semibold text-xl text-gray-800 leading-tight">
+                    {{$deck->name }}
+                </h2>
+                <form method="POST" action="{{ route('decks.share.generate', $deck) }}">
+                    @csrf
+
+                    <button class="bg-indigo-600 text-white px-4 py-2 rounded">
+                        Udostępnij
+                    </button>
+                </form>
+                @if ($deck->share_token)
+                <input
+                    type="text"
+                    readonly
+                    value="{{ route('decks.share', $deck->share_token) }}"
+                    class="w-full border rounded px-3 py-2">
+                @endif
+
+                <a href="{{ route('decks.learn',['deck'=>$deck->id]) }}"
+                    class="flex items-center gap-2 px-4 py-3 bg-[#9cf] text-white font-semibold rounded-full shadow-[0_4px_14px_0_rgba(79,70,229,0.39)] transition-all hover:bg-[#88c3ff] hover:shadow-indigo-500/50 hover:-translate-y-0.5 active:scale-95">
+                    <span>Rozpocznij</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
+                </a>
+            </div>
         </x-slot>
 
         <div class="py-12">
@@ -33,7 +57,7 @@
                     <form action="{{ route('flashcards.store',[ 'deck' => $deck->id]) }}" method="post">
                         @csrf
                         @method('post')
-                        <button class="hover:text-[#9ce4ff] transition-colors duration-100 text-gray-500"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.7" stroke="currentColor" class="size-24">
+                        <button class="hover:text-[#9ce4ff] transition-colors duration-100 text-gray-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.7" stroke="currentColor" class="size-24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
                         </button>
@@ -68,7 +92,7 @@
                 @foreach($flashcards as $card)
                 <div class="w-full flex flex-col justify-center items-center">
                     <hr class="border-t-2 border-gray-300 w-[60%] m-6">
-                    <div class="flex flex-row justify-between"
+                    <div class="flex flex-col lg:flex-row justify-between"
                         x-data="{
                                 async saveData(component, field) {
                                     if (component.value === component.original) return;
@@ -108,7 +132,7 @@
                                         error: null,
                             }">
                             <div class="flex flex-row justify-between items-center">
-                                <label class="block text-xs font-semibold text-gray-400 uppercase">
+                                <label class="block font-semibold text-gray-400 uppercase">
                                     Przód
                                 </label>
                                 <form action="{{ route('flashcards.destroy', ['flashcard'=>$card->id,'deck' => $deck->id]) }}" method='post'>
@@ -123,7 +147,7 @@
                             </div>
 
                             <textarea
-                                class="w-full h-[120px] resize-none border-none p-0 focus:ring-0 text-gray-700 text-lg leading-relaxed placeholder:text-gray-300"
+                                class="w-full h-[120px] resize-none border-none p-0 focus:ring-0 text-gray-700 leading-relaxed placeholder:text-gray-300 text-[0.8rem] md:text-[1.1rem]"
                                 placeholder="Wpisz pytanie..."
                                 x-model="value"
                                 @blur="saveData($data, 'front')"></textarea>
@@ -148,10 +172,10 @@
                                         saving: false,
                                         error: null,
                             }">
-                            <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Tył</label>
+                            <label class="block font-semibold text-gray-400 uppercase mb-2">Tył</label>
                             <textarea
                                 name="back[]"
-                                class="w-full h-[120px] resize-none border-none p-0 focus:ring-0 text-gray-700 text-lg leading-relaxed placeholder:text-gray-300"
+                                class="w-full h-[120px] resize-none border-none p-0 focus:ring-0 text-gray-700 leading-relaxed placeholder:text-gray-300"
                                 placeholder="Wpisz odpowiedź..."
                                 x-model="value"
                                 @blur='saveData($data, "back")'></textarea>

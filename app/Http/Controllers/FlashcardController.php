@@ -13,6 +13,12 @@ class FlashcardController extends Controller
         $flashcards = $deck->flashcards()->latest()->get();
         return view('flashcards', ['deck' => $deck, 'flashcards' => $flashcards]);
     }
+    public function learn($deckId)
+    {
+        $deck = auth()->user()->decks()->findOrFail($deckId);
+        $flashcards = $deck->flashcards()->latest()->get();
+        return view('deck-learn', ['deck' => $deck, 'flashcards' => $flashcards]);
+    }
 
     public function store(Request $request, $deckId)
     {

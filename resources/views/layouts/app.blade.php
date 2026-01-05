@@ -17,23 +17,28 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen">
+    <div class="min-h-screen flex flex-col">
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        @isset($header)
-        <header class="bg-white shadow bg-fixed">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-        @endisset
+        <div class="flex-1 flex flex-col">
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+
+            @isset($header)
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+            @endisset
+
+            <main class="flex-1">
+                {{ $slot }}
+            </main>
+
+            @include('layouts.footer')
+        </div>
     </div>
+
 </body>
 
 </html>
