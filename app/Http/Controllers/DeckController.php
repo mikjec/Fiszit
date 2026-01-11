@@ -56,4 +56,15 @@ class DeckController extends Controller
         }
         return back()->with('succes', 'Zestaw został udostępniony!');
     }
+    public function unShare(Deck $deck)
+    {
+        abort_if($deck->user_id !== auth()->id(), 403);
+        if ($deck->share_token) {
+            $deck->update([
+                'is_public' => false,
+                'share_token' => '',
+            ]);
+        }
+        return back()->with('succes', 'Zakończono udostępnianie!');
+    }
 }

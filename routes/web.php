@@ -24,6 +24,10 @@ Route::post('/decks/{deck}/share', [DeckController::class, 'share'])
     ->middleware('auth')
     ->name('decks.share.generate');
 
+Route::post('/decks/{deck}/unshare', [DeckController::class, 'unShare'])
+    ->middleware('auth')
+    ->name('decks.unshare');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/decks', [DeckController::class, 'index'])->name('decks');
@@ -42,6 +46,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/decks/{deck}/flashcards', [FlashcardController::class, 'store'])
         ->name('flashcards.store');
+
+    Route::post('/decks/{deck}/flashcards/import', [FlashcardController::class, 'importFile'])
+        ->name('flashcards.import.file');
 
     Route::put('/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'update'])
         ->name('flashcards.update');

@@ -40,7 +40,7 @@
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
 
-            <div class="flex items-center justify-between mt-4">
+            <div class="flex flex-col-reverse py-3 gap-4 sm:flex-row items-end sm:items-center justify-between mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9ce4ff]" href="{{ route('login') }}">
                     {{ __('Masz już konto?') }}
                 </a>

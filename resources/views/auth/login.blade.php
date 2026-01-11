@@ -33,19 +33,21 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-between mt-4">
-                @if (Route::has('password.request'))
+            <!-- <div class="flex items-center justify-between mt-4"> -->
+            <!-- @if (Route::has('password.request'))
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#9ce4ff]" href="{{ route('password.request') }}">
                     {{ __('Zapomniałeś hasła?') }}
                 </a>
-                @endif
+                @endif -->
+            <div class="w-full flex flex-col-reverse sm:flex-row items-end gap-4 py-4 sm:items-center justify-between">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">Nie masz jeszcze konta?</a>
 
                 <x-primary-button class="ms-3">
                     {{ __('Zaloguj się') }}
                 </x-primary-button>
-
             </div>
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">Nie masz jeszcze konta?</a>
+
+            <!-- </div> -->
         </form>
     </div>
 </x-guest-layout>
