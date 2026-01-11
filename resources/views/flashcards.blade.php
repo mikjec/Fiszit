@@ -115,7 +115,7 @@
             <div>
                 <form action="{{ route('flashcards.import.file', $deck) }}" method="post" enctype="multipart/form-data" class="w-full flex flex-col mt-8 md:flex-row gap-4 items-center justify-center">
                     @csrf
-                    <input type="file" name='flashcardsFile' accept=".csv,.txt" required class="lock text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-gray-300 cursor-pointer file:text-white hover:file:bg-gray-400">
+                    <input type="file" name='flashcards_file' accept=".csv,.txt" required class="lock text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-gray-300 cursor-pointer file:text-white hover:file:bg-gray-400">
                     <button type="submit" class="px-3 py-2 bg-[#9cf]  hover:bg-[#89b6e4] rounded-lg text-white">Dodaj</button>
                 </form>
             </div>

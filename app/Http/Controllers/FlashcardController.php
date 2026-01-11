@@ -34,10 +34,10 @@ class FlashcardController extends Controller
         $deck = auth()->user()->decks()->findOrFail($deckId);
 
         $request->validate([
-            'flashcardsFile' => 'required|file|mimes:csv,txt'
+            'flashcards_file' => 'required|file|mimes:csv,txt'
         ]);
 
-        $file = $request->file('flashcardsFile');
+        $file = $request->file('flashcards_fgit ile');
         $content = file($file->getRealPath());
         $imported = 0;
         $skipped = 0;

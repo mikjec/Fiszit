@@ -62,7 +62,7 @@ class DeckController extends Controller
         if ($deck->share_token) {
             $deck->update([
                 'is_public' => false,
-                'share_token' => '',
+                'share_token' => null,
             ]);
         }
         return back()->with('succes', 'Zakończono udostępnianie!');

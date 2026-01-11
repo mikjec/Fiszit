@@ -55,6 +55,12 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/decks/{deck}/flashcards/{flashcard}', [FlashcardController::class, 'destroy'])
         ->name('flashcards.destroy');
+
+    Route::post('/decks/{deck}/share', [DeckController::class, 'share'])
+        ->name('decks.share.generate');
+
+    Route::post('/decks/{deck}/unshare', [DeckController::class, 'unShare'])
+        ->name('decks.unshare');
 });
 
 
