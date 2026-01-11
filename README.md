@@ -1,0 +1,2 @@
+# Fiszit
+Flashcards Laravel App
