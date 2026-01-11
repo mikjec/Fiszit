@@ -26,7 +26,7 @@
         </div>
         <div class=" flex flex-col items-center justify-evenly h-[70%]">
             <div class="w-[50%]">
-                <img src="{{ asset('storage/images/hello.gif') }}" alt="hello typing gif ">
+                <img src="{{ asset('hello.gif') }}" alt="hello typing gif ">
             </div>
             <div class=" flex flex-col justify-center items-center gap-4">
                 <a href="{{ route('login') }}" class="welcome-btn sm:text-[1.2em] md:text-[1.4em] lg:text-[1.4em]">Zaloguj się</a>
