@@ -37,7 +37,7 @@ class FlashcardController extends Controller
             'flashcards_file' => 'required|file|mimes:csv,txt'
         ]);
 
-        $file = $request->file('flashcards_fgit ile');
+        $file = $request->file('flashcards_file');
         $content = file($file->getRealPath());
         $imported = 0;
         $skipped = 0;
